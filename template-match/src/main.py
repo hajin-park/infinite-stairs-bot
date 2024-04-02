@@ -1,5 +1,4 @@
-'''Python OpenCV Infinite Stairs Bot'''
-
+"""Python OpenCV Infinite Stairs Bot"""
 
 from modules.bot import Bot
 from modules.images import Images
@@ -10,13 +9,14 @@ import keyboard as kb
 from time import sleep
 
 
-kb.wait('s')
+kb.wait("s")
 
 #   initialize modules
 images = Images()
 sct = WindowCapture()
 detector = ObjectDetection(
-    images.stair_images, sct.horizontal_layers, sct.vertical_layers)
+    images.stair_images, sct.horizontal_layers, sct.vertical_layers
+)
 pathfinder = PathFinder()
 bot = Bot(images.start_images, images.stop_images)
 
@@ -25,6 +25,7 @@ def main():
 
     sct.start()  # start screenshot thread
     while sct.screenshot is None:
+        print("test")
         sleep(0)  # wait for the first screenshot
     bot.update_screenshot(sct.screenshot)  # give the bot the first screenshot
     bot.start()  # start bot thread
@@ -44,15 +45,15 @@ def main():
         sct.update(pathfinder.stairs_connected)
 
         #   update bot actions
-        if (bot.state == 'READY'):
+        if bot.state == "READY":
             bot.update_actions(pathfinder.actions)
 
         #   terminate the bot with a "q" keypress
-        if kb.is_pressed('q'):
+        if kb.is_pressed("q"):
             sct.stop()
             bot.stop()
             break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

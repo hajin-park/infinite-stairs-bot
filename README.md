@@ -60,11 +60,7 @@ library.
 
 #### Game Inputs
 
-The game will turn the character on `True` and step forward on `False`. This
-component will repeatedly dequeue the next value and
-
-The portion of the screen containing the game client is captured using the mss
-library.
+The game will turn the character on `True` and step forward on `False`.
 
 ## Acknowledgements
 

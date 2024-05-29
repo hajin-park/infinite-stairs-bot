@@ -40,6 +40,7 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
    pytest tests
    ```
 6. Configure settings config.ini for your device's specifications [TODO]
+7. Run ```main.py``` to run the bot. _(more details TBD)_
 
 ## Design [TODO]
 

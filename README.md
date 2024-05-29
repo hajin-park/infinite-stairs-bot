@@ -35,7 +35,7 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
     conda activate isb-yolo
     ```
 
-## Design
+## Design [TODO]
 
 The bot operates using three main components: screenshots, processing, and game
 inputs. Each component is run in parallel using multiprocessing since the
@@ -56,11 +56,13 @@ library.
 3. Fill a queue with `True` (Turn) or `False`(Forward) values based on the path.
 4. Keep track of a "current" queue state and "new" queue state. If their
    intersection is "valid" then queue new values from the "new" state into the
-   "current" state
+   "current" state. If the "current" queue is empty, use the "new" state as the
+   "current" state.
 
 #### Game Inputs
 
-The game will turn the character on `True` and step forward on `False`.
+The game will turn the character on `True` and step forward on `False`. Use
+PyDirectInput to send keystrokes to the client.
 
 ## Acknowledgements
 

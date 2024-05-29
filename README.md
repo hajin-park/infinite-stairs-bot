@@ -17,7 +17,8 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
 1. Install
    [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
    or [miniconda](https://docs.anaconda.com/free/miniconda/)
-2. Create the environment: _for Multi-Template Matching (Windows):_
+2. Create the environment:
+    _for Multi-Template Matching (Windows):_
     ```
     conda env create -f environment_mtm.yml
     ```
@@ -25,8 +26,8 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
     ```
     conda env create -f environment_yolo.yml
     ```
-3. Make sure you can activate the environment: _for Multi-Template Matching
-   (Windows):_
+4. Make sure you can activate the environment:
+    _for Multi-Template Matching (Windows):_
     ```
     conda activate isb-mtm
     ```
@@ -34,6 +35,11 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
     ```
     conda activate isb-yolo
     ```
+5. Run tests [TODO]
+   ```
+   pytest tests
+   ```
+6. Configure settings config.ini for your device's specifications [TODO]
 
 ## Design [TODO]
 
@@ -52,7 +58,7 @@ library.
    model (subject to change, new models come out every several months :\\) to
    detect stair and other miscellaneous objects.
 2. A path-tracing algorithm fills in any empty spaces missed by the previous
-   step (max two stairs can be filled due to logical constraints).
+   step (max two consecutive stairs can be filled due to logical constraints).
 3. Fill a queue with `True` (Turn) or `False`(Forward) values based on the path.
 4. Keep track of a "current" queue state and "new" queue state. If their
    intersection is "valid" then queue new values from the "new" state into the

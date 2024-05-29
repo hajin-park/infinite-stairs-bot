@@ -35,6 +35,37 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
     conda activate isb-yolo
     ```
 
+## Design
+
+The bot operates using three main components: screenshots, processing, and game
+inputs. Each component is run in parallel using multiprocessing since the
+processing step is by far the largest speed bottleneck.
+
+#### Screenshots
+
+The portion of the screen containing the game client is captured using the mss
+library.
+
+#### Processing
+
+1. Screenshots are processed using either Multi-Template Matching or a YOLO
+   model (subject to change, new models come out every several months :\\) to
+   detect stair and other miscellaneous objects.
+2. A path-tracing algorithm fills in any empty spaces missed by the previous
+   step (max two stairs can be filled due to logical constraints).
+3. Fill a queue with `True` (Turn) or `False`(Forward) values based on the path.
+4. Keep track of a "current" queue state and "new" queue state. If their
+   intersection is "valid" then queue new values from the "new" state into the
+   "current" state
+
+#### Game Inputs
+
+The game will turn the character on `True` and step forward on `False`. This
+component will repeatedly dequeue the next value and
+
+The portion of the screen containing the game client is captured using the mss
+library.
+
 ## Acknowledgements
 
 Thomas, L.S.V., Gehrig, J. Multi-template matching: a versatile tool for

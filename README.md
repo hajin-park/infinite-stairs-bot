@@ -53,7 +53,8 @@ library.
    detect stair and other miscellaneous objects.
 2. A path-tracing algorithm fills in any empty spaces missed by the previous
    step (max two stairs can be filled due to logical constraints).
-3. Fill a queue with `True` (Turn) or `False`(Forward) values based on the path.
+3. Fill a queue with `True` (Turn) or `False` (Forward) values based on the
+   path.
 4. Keep track of a "current" queue state and "new" queue state. If their
    intersection is "valid" then queue new values from the "new" state into the
    "current" state. If the "current" queue is empty, use the "new" state as the

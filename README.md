@@ -34,6 +34,12 @@ object-detection can be used; Multi-Template Matching and YOLOv10.
     ```
     conda activate isb-yolo
     ```
+4. Run tests [TODO]
+    ```
+    pytest tests
+    ```
+5. Configure settings config.ini for your device's specifications [TODO]
+6. Run `main.py` to run the bot. _(more details TBD)_
 
 ## Design [TODO]
 
@@ -52,9 +58,8 @@ library.
    model (subject to change, new models come out every several months :\\) to
    detect stair and other miscellaneous objects.
 2. A path-tracing algorithm fills in any empty spaces missed by the previous
-   step (max two stairs can be filled due to logical constraints).
-3. Fill a queue with `True` (Turn) or `False` (Forward) values based on the
-   path.
+   step (max two consecutive stairs can be filled due to logical constraints).
+3. Fill a queue with `True` (Turn) or `False`(Forward) values based on the path.
 4. Keep track of a "current" queue state and "new" queue state. If their
    intersection is "valid" then queue new values from the "new" state into the
    "current" state. If the "current" queue is empty, use the "new" state as the

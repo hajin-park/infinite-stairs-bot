@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 
 
-class WindowCapture:
+class Screenshot:
     def __init__(self):
         window_handle = win32.FindWindow(None, "BlueStacks App Player")
         client_rect = win32.GetClientRect(window_handle)

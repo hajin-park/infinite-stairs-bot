@@ -1,34 +1,29 @@
-from utils.window_capture import WindowCapture
+from utils.screenshot import Screenshot
+from utils.assets import Assets
 from mtm.inference import MultiTemplateMatch
-import os
+import concurrent
 import cv2
 
 
-capture = WindowCapture()
+sct = Screenshot()
 mtm = MultiTemplateMatch()
+assets = Assets(cv2.IMREAD_UNCHANGED)
 
-stair_images = [
-    cv2.imread(
-        os.path.join(os.getcwd(), "mtm", "templates", "green_brick_stair.png"),
-        cv2.IMREAD_UNCHANGED,
-    ),
-    cv2.imread(
-        os.path.join(os.getcwd(), "mtm", "templates", "gold_stair.png"),
-        cv2.IMREAD_UNCHANGED,
-    ),
-    cv2.imread(
-        os.path.join(os.getcwd(), "mtm", "templates", "gem_stair.png"),
-        cv2.IMREAD_UNCHANGED,
-    ),
-]
 
-while True:
-    result = mtm.predict(
-        [
-            ("green_brick_stair", stair_images[0]),
-            ("gold_stair", stair_images[0]),
-            ("gem_stair", stair_images[0]),
-        ],
-        capture.get_screenshot(),
-    )
-    capture.show_window([600, 0], result)
+def main():
+    with concurrent.futures.ProcessPoolExecutor() as executor:
+        hits = []
+        while True:
+            current_sct = sct.get_screenshot()
+            result = executor.submit(
+                mtm.predict, assets.get_stair_assets(), current_sct
+            )
+            executor.submit(
+                sct.show_window,
+                [600, 0],
+                sct.get_screenshot(),
+            )
+
+
+if __name__ == "__main__":
+    main()
